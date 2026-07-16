@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Love ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700&family=Great+Vibes&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#FFFEFD; --beige:#F7F1E9; --pink:#FADADD; --gold:#D4AF37; --gold-light:#F0E68C; --text:#5A4A4A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{font-family:'Tajawal', sans-serif;background:var(--beige);color:var(--text);overflow:hidden;height:100vh}
+.bg-particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;background:linear-gradient(180deg,var(--white) 0%, var(--pink) 100%)}
+.floating{position:absolute;color:var(--gold);opacity:0.2;animation:float 12s infinite ease-in;pointer-events:none;font-size:14px}
+@keyframes float{0%{transform:translateY(100vh)} 50%{opacity:0.4} 100%{transform:translateY(-10vh) rotate(360deg);opacity:0}}
+.container{position:relative;width:100%;height:100vh}
+.page{position:absolute;width:100%;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;opacity:0;transform:translateY(30px);transition:all 0.8s ease;z-index:1; pointer-events:none; overflow-y:auto}
+.page.active{opacity:1;transform:translateY(0);z-index:2; pointer-events:auto}
+h1{font-family:'Playfair Display',serif;font-size:clamp(1.8rem,5vw,3rem);color:var(--gold);margin:15px 0}
+h2{font-family:'Great Vibes', cursive;font-size:clamp(1.5rem,4vw,2.5rem);color:var(--gold);margin-bottom:15px}
+p{font-size:clamp(1rem,2.5vw,1.1rem);line-height:1.8;max-width:650px}
+.btn{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:white;border:none;padding:14px 35px;border-radius:50px;font-size:clamp(1rem,2.5vw,1.1rem);cursor:pointer;margin-top:20px;font-weight:700;transition:all 0.3s ease;box-shadow:0 6px 20px rgba(212,175,55,0.3)}
+.btn:hover{transform:translateY(-3px)}
+.main-photo{width:clamp(180px,30vw,250px);height:clamp(180px,30vw,250px);border-radius:50%;object-fit:cover;border:5px solid var(--gold)}
+.gallery{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;max-width:900px}
+.polaroid{background:white;padding:10px 10px 35px;width:clamp(140px,25vw,200px);border-radius:6px;box-shadow:0 10px 20px rgba(0,0,0,0.1);cursor:pointer}
+.polaroid img{width:100%;height:clamp(120px,20vw,170px);object-fit:cover;border-radius:4px}
+#loveLetter{white-space:pre-wrap;text-align:right;border-right:3px solid var(--gold);padding-right:15px;font-size:clamp(1rem,2.5vw,1.2rem)}
+.cake{position:relative;width:clamp(160px,25vw,200px);height:clamp(160px,25vw,200px);cursor:pointer}
+.cake-layer{position:absolute;width:100%;border-radius:15px}
+.layer1{height:70px;background:linear-gradient(#F8C4C8,var(--pink));bottom:0}
+.layer2{height:60px;width:90%;background:linear-gradient(#FADADD,#F8C4C8);bottom:70px;left:5%}
+.layer3{height:50px;width:80%;background:linear-gradient(var(--pink),#FADADD);bottom:130px;left:10%}
+.candle{position:absolute;width:12px;height:40px;background:linear-gradient(var(--gold),#E8C874);border-radius:5px;top:-25px}
+.flame{width:16px;height:22px;background:radial-gradient(#FFD700, orange, red);border-radius:50%;animation:flicker 0.4s infinite alternate;position:absolute;top:-20px;left:50%;transform:translateX(-50%)}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:15px;width:90%;max-width:900px}
+.card{background:rgba(255,255,255,0.9);padding:20px;border-radius:15px;border:2px solid var(--pink)}
+.modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:999;opacity:0;pointer-events:none;transition:0.4s}
+.modal.active{opacity:1;pointer-events:auto}
+.modal img{max-width:90%;max-height:80%;border-radius:15px;border:4px solid var(--gold)}
+.confetti{position:fixed;width:10px;height:10px;top:-15px;animation:fall 4s linear forwards;z-index:999}
+video{border-radius:15px;box-shadow:0 10px 30px rgba(0,0,0,0.15);margin-top:15px}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+@keyframes flicker{from{transform:translateX(-50%) scale(1)}to{transform:translateX(-50%) scale(1.2)}}
+</style>
+</head>
+<body>
+
+<div class="bg-particles" id="particles"></div>
+<audio id="bgMusic" loop src="romantic.mp3"></audio>
+<div class="modal" id="modal" onclick="this.classList.remove('active')"><img id="modalImg" src=""></div>
+
+<div class="container">
+<!-- الصفحة 1 -->
+<section class="page active" id="page1">
+  <img id="mainPhoto" src="your-photo.jpg" class="main-photo">
+  <h1 id="title1">Happy Birthday, My Love ❤️</h1>
+  <p id="subtitle1">حضرتلك هدية بسيطة من قلبي... اضغط على زر البداية واستمتع بالرحلة.</p>
+  <button class="btn" onclick="nextPage();document.getElementById('bgMusic').play()" id="btn1">ابدأ الرحلة ✨</button>
+</section>
+
+<!-- الصفحة 2 -->
+<section class="page" id="page2">
+  <h2>ذكرياتنا</h2>
+  <div class="gallery" id="gallery"></div>
+  <button class="btn" onclick="nextPage()">التالي</button>
+</section>
+
+<!-- الصفحة 3 -->
+<section class="page" id="page3">
+  <h2>رسالة من قلبي ليك</h2>
+  <p id="loveLetter"></p>
+  <button class="btn" onclick="nextPage()">التالي</button>
+</section>
+
+<!-- الصفحة 4 -->
+<section class="page" id="page4">
+  <h2>اطفي الشموع واتمنى أمنية 🎂</h2>
+  <div class="cake" onclick="blowCandles()">
+    <div class="cake-layer layer1"></div><div class="cake-layer layer2"></div><div class="cake-layer layer3"></div>
+    <div class="candle" style="left:25%"><div class="flame"></div></div>
+    <div class="candle" style="left:50%"><div class="flame"></div></div>
+    <div class="candle" style="left:75%"><div class="flame"></div></div>
+  </div>
+</section>
+
+<!-- الصفحة 5 -->
+<section class="page" id="page5">
+  <h2>أشياء أحبها فيك</h2>
+  <div class="cards" id="cards"></div>
+  <button class="btn" onclick="nextPage()">التالي</button>
+</section>
+
+<!-- الصفحة 6 - المفاجأة الأولى -->
+<section class="page" id="page6">
+  <h2 id="title6">جهزتلك مفاجأة 🎁</h2>
+  <button class="btn" onclick="revealSurprise1()">اضغط وشوف</button>
+  <video id="surpriseVideo1" width="85%" style="display:none" controls src="surprise1.mp4"></video>
+</section>
+
+<!-- الصفحة 7 - النهاية + المفاجأة التانية -->
+<section class="page" id="page7">
+  <h2>مفاجأة كمان 😏❤️</h2>
+  <button class="btn" onclick="revealSurprise2()">آخر مفاجأة</button>
+  <video id="surpriseVideo2" width="85%" style="display:none" controls src="surprise2.mp4"></video>
+
+  <h1 id="title7" style="margin-top:30px">كل سنة وأنت أجمل شخص في حياتي ❤️</h1>
+  <p id="finalText"></p>
+</section>
+</div>
+
+<script>
+// ==================== منطقة التعديل السهل ====================
+const DATA = {
+  mainPhoto: "your-photo.jpg",
+  title1: "Happy Birthday, My Love ❤️",
+  subtitle1: "حضرتلك هدية بسيطة من قلبي... اضغط على زر البداية واستمتع بالرحلة.",
+  btn1: "ابدأ الرحلة ✨",
+  title6: "جهزتلك مفاجأة 🎁",
+  gallery: [
+    {img: "img1.jpg", text: "14 فبراير 2024 - أول لقاء"},
+    {img: "img2.jpg", text: "ضحكتنا اللي مش بتخلص"},
+    {img: "img3.jpg", text: "يوم السفر بتاعنا"}
+  ],
+  loveLetter: `حبي،\n\nفي يوم زي النهاردة الدنيا بقت أحلى عشانك اتولدت...\nكل سنة معاك بتثبتلي إن الحب الحقي موجود.\n\nإنت مش بس حبي، إنت بيتي وأماني وضحكتي.\nبحبك قد الدنيا كلها ❤️`,
+  cards: [
+    {title: "10 أشياء أحبها فيك", text: "1. ضحكتك\n2. حنانك\n3. جنانك الحلو\n4. طيبة قلبك\n5. دعمك ليا\n6. عيونك\n7. صوتك\n8. اهتمامك\n9. جنبك بحس بالأمان\n10. كل تفاصيلك"},
+    {title: "أجمل ذكرى", text: "اليوم اللي قولتلك بحبك وابتسمتي"},
+    {title: "موقف خلاني أبتسم", text: "لما بعتيللي صباح الخير"},
+    {title: "أمنيتي لك", text: "سنة جديدة كلها نجاح وحب ❤️"}
+  ],
+  title7: "كل سنة وأنت أجمل شخص في حياتي ❤️",
+  finalText: `أتمنى تكون كل أيامك سعادة، وأفضل دايمًا أشوف ابتسامتك.<br><br>شكرًا لأنك موجود في حياتي، وربنا يخليك ليا ويحفظك.<br><br>Happy Birthday, My Love. 🎂✨`
+};
+// ==================== نهاية منطقة التعديل ====================
+
+// تحميل البيانات
+document.getElementById('mainPhoto').src = DATA.mainPhoto;
+document.getElementById('title1').textContent = DATA.title1;
+document.getElementById('subtitle1').textContent = DATA.subtitle1;
+document.getElementById('btn1').textContent = DATA.btn1;
+document.getElementById('title6').textContent = DATA.title6;
+document.getElementById('title7').textContent = DATA.title7;
+document.getElementById('finalText').innerHTML = DATA.finalText;
+
+const galleryDiv = document.getElementById('gallery');
+DATA.gallery.forEach(item=>{galleryDiv.innerHTML += `<div class="polaroid"><img src="${item.img}" onclick="openModal(this.src)"><span>${item.text}</span></div>`})
+
+const cardsDiv = document.getElementById('cards');
+DATA.cards.forEach(card=>{cardsDiv.innerHTML += `<div class="card"><h3>${card.title}</h3><p>${card.text.replace(/\n/g, '<br>')}</p></div>`})
+
+let currentPage = 1;
+const totalPages = 7;
+const bgMusic = document.getElementById('bgMusic');
+const video1 = document.getElementById('surpriseVideo1');
+const video2 = document.getElementById('surpriseVideo2');
+
+// الفيديو الأول: لما يخلص يروح الصفحة 7
+video1.addEventListener('play', () => { bgMusic.pause(); bgMusic.currentTime = 0; });
+video1.addEventListener('ended', () => {
+  bgMusic.play();
+  setTimeout(() => nextPage(), 1200); // يروح للصفحة اللي بعدها بعد ثانية
+});
+video1.addEventListener('pause', () => { if(video1.currentTime < video1.duration){ bgMusic.play(); } });
+
+// الفيديو التاني: لما يخلص الموسيقى ترجع بس
+video2.addEventListener('play', () => { bgMusic.pause(); bgMusic.currentTime = 0; });
+video2.addEventListener('ended', () => { bgMusic.play(); });
+video2.addEventListener('pause', () => { if(video2.currentTime < video2.duration){ bgMusic.play(); } });
+
+function nextPage(){
+  if(currentPage >= totalPages) return;
+  document.getElementById(`page${currentPage}`).classList.remove('active');
+  currentPage++;
+  document.getElementById(`page${currentPage}`).classList.add('active');
+  if(currentPage===3) typeWriter();
+}
+
+function typeWriter(){
+  let i=0; const el = document.getElementById('loveLetter'); el.textContent = '';
+  const timer = setInterval(()=>{el.textContent += DATA.loveLetter[i]; i++; if(i>=DATA.loveLetter.length) clearInterval(timer)}, 70);
+}
+
+function blowCandles(){
+  document.querySelectorAll('.flame').forEach(f=>f.style.display='none');
+  for(let i=0;i<120;i++) setTimeout(createConfetti, i*20);
+  setTimeout(()=>{alert("🎉 Happy Birthday My Love 🎉"); nextPage()}, 2000);
+}
+function createConfetti(){
+  const c = document.createElement('div');c.className='confetti';
+  c.style.left=Math.random()*100+'%';c.style.background=`hsl(${Math.random()*60+30},100%,65%)`;
+  document.body.appendChild(c);setTimeout(()=>c.remove(),4000)
+}
+function revealSurprise1(){
+  video1.style.display='block';
+  video1.play();
+}
+function revealSurprise2(){
+  video2.style.display='block';
+  video2.play();
+}
+function openModal(src){
+  document.getElementById('modalImg').src = src;
+  document.getElementById('modal').classList.add('active');
+}
+
+// قلوب
+setInterval(()=>{
+  const el = document.createElement('div'); el.className = 'floating';
+  el.innerHTML = Math.random()>0.5?'❤️':'★';
+  el.style.left = Math.random()*100+'%';
+  el.style.animationDuration = Math.random()*6+6+'s';
+  document.getElementById('particles').appendChild(el);
+  setTimeout(()=>el.remove(),12000)
+},400)
+</script>
+</body>
+</html>
